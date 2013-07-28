@@ -1,4 +1,4 @@
-package dp;
+package dynamicprogramming;
 
 /**
  * Given a sequence of numbers(no 0), cut it into several pieces with length no more than 5,
