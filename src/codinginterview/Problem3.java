@@ -1,55 +1,33 @@
 package codinginterview;
 
-public class Problem3{
-	public static void main(String[] args){
-		//0
-		int[] matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		int m=4;
-		int n=4;
-		int value=7;
-		System.out.println(findNumber(matrix,m,n,value)==true);
-		
-		//1
-		matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		m=4;
-		n=4;
-		value=5;
-		System.out.println(findNumber(matrix,m,n,value)==false);
-		
-		//2
-		matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		m=4;
-		n=4;
-		value=1;
-		System.out.println(findNumber(matrix,m,n,value)==true);
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
-		//3
-		matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		m=4;
-		n=4;
-		value=15;
-		System.out.println(findNumber(matrix,m,n,value)==true);
-		
-		//4
-		matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		m=4;
-		n=4;
-		value=0;
-		System.out.println(findNumber(matrix,m,n,value)==false);
-		
-		//5
-		matrix=new int[]{1, 2, 8, 9, 2, 4, 9, 12, 4, 7, 10, 13, 6, 8, 11, 15};
-		m=4;
-		n=4;
-		value=16;
-		System.out.println(findNumber(matrix,m,n,value)==false);
-		
-		//3
-		matrix=null;
-		m=0;
-		n=0;
-		value=15;
-		System.out.println(findNumber(matrix,m,n,value)==false);
+public class Problem3{
+	public static void main(String[] args) throws IOException{
+		StreamTokenizer st = new StreamTokenizer(new BufferedReader(
+				new InputStreamReader(System.in)));
+		while (st.nextToken() != StreamTokenizer.TT_EOF) {
+			int m = (int) st.nval;
+			st.nextToken();
+			int n = (int) st.nval;
+			st.nextToken();
+			int value = (int) st.nval;
+			int[] matrix = new int[m * n];
+			for (int i = 0; i < m * n; i++) {
+				st.nextToken();
+				matrix[i] = (int) st.nval;
+			}
+
+			if (findNumber(matrix, m, n, value)) {
+				System.out.println("Yes");
+			} else {
+				System.out.println("No");
+			}
+		}
+
 	}
 	
 	public static boolean findNumber(int[] matrix,int rows, int columns, int value) {
