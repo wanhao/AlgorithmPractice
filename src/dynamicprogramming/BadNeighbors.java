@@ -30,7 +30,7 @@ public class BadNeighbors {
     System.out.println(maxDonations1(a) == 2926);
   }
 
-  // d(i) = max donation when considering first i elements and ith element is surely taken in it.
+  //d(i) = max donations considering just the elements from 0 to i and no constraints on i ,you may take it or not
   public static int maxDonations(int[] donations) {
     if (donations == null || donations.length == 0) return 0;
     else if (donations.length == 1) return donations[0];
@@ -56,7 +56,8 @@ public class BadNeighbors {
     return Math.max(d1[donations.length - 2], d2[donations.length - 1]);
   }
 
-  //d(i) = max donations considering just the elements from 0 to i and no constraints on i ,you may take it or not
+
+//d(i) = max donation when considering first i elements and ith element is surely taken in it.
   public static int maxDonations1(int[] donations) {
     if (donations == null || donations.length == 0) return 0;
     else if (donations.length == 1) return donations[0];
