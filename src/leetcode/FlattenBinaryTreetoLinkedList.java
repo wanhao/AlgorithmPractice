@@ -27,29 +27,29 @@ public class FlattenBinaryTreetoLinkedList {
 		treeToList(root);
 	}
 
-	private TreeNode[] treeToList(TreeNode root) {
+	private TreeNode treeToList(TreeNode root) {
 		if (root == null)
 			return null;
 
-		TreeNode[] left = treeToList(root.left);
-		TreeNode[] right = treeToList(root.right);
+		TreeNode left=root.left;
+		TreeNode right=root.right;
+		
+		TreeNode leftEnd = treeToList(left);
+		TreeNode rightEnd = treeToList(right);
 
 		root.left = null;
-		TreeNode last = root;
 		if (left != null) {
-			last.right = left[0];
-			left[0].left = last;
-			last = left[1];
+			root.right = left;
+			root = leftEnd;
 		}
 
 		if (right != null) {
-			last.right = right[0];
-			right[0].left = last;
-			last = right[1];
+			root.right = right;
+			root = rightEnd;
 		}
-		last.right = null;
+		root.right = null;
 
-		return new TreeNode[] { root, last };
+		return root;
 	}
 
 	static class TreeNode {
