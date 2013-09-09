@@ -7,13 +7,15 @@ public class ClimbingStairs {
 		if(n==1) return 1;
 		if(n==2) return 2;
 		
-		int[] steps=new int[n+1];
-		steps[1]=1;
-		steps[2]=2;
+		int step1=1;
+		int step2=2;
+		int tmp;
 		for(int i=3;i<=n;i++){
-			steps[i]=steps[i-1]+steps[i-2];
+			tmp=step1+step2;
+			step1=step2;
+			step2=tmp;
 		}
 		
-		return steps[n];
+		return step2;
     }
 }
