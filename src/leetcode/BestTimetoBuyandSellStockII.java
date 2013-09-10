@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.ArrayList;
+
 public class BestTimetoBuyandSellStockII {
 	
 	
@@ -7,6 +9,18 @@ public class BestTimetoBuyandSellStockII {
 		if (prices == null || prices.length <= 1)
 			return 0;
 
+		ArrayList<Integer> tmpList=new ArrayList<Integer>();
+		tmpList.add(prices[0]);
+		for(int i=1;i<prices.length;i++){
+			if(prices[i]!=prices[i-1]){
+				tmpList.add(prices[i]);
+			}
+		}
+		prices=new int[tmpList.size()];
+		for(int i=0;i<tmpList.size();i++){
+			prices[i]=tmpList.get(i);
+		}
+		
 		int[] min = new int[prices.length];
 		for(int i=0;i<prices.length;i++){
 			min[i]=prices[i];
