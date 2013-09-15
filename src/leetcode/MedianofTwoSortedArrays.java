@@ -39,18 +39,47 @@ public class MedianofTwoSortedArrays {
 	
 	private int findKthInSortedArrays(int[] A, int[] B, int k){
 		int i=0,j=0;
-		int nexti, nextj,half=-1;
+		int half=-1;
 		while(k>1 && i<A.length && j<B.length){
 			half=k/2;
-			nexti=(i+half)<A.length?(i+half):A.length-1;
-			nextj=(j+half)<B.length?(j+half):B.length-1;
-			if(A[nexti]<B[nextj]){
-				k-=nexti+1-i;
-				i=nexti+1;
-			}else{
-				k-=nextj+1-j;
-				j=nextj+1;
+			if((i+half)<A.length &&(j+half)<B.length){
+				if(A[i+half]<B[j+half]){
+					k-=half;
+					i+=half;
+				}else if(A[i+half]>B[j+half]){
+					k-=half;
+					j+=half;
+				}else{
+					k-=half*2;
+					i+=half;
+					j+=half;
+				}
+			}else if(i+half<A.length){
+				if(A[i+half]<B[B.length-1]){
+					k-=half;
+					i+=half;
+				}else if(A[i+half]>B[B.length-1]){
+					k-=B.length-j;
+					j+=B.length-j;
+				}else{
+					k-=half+B.length-j;
+					i+=half;
+					j+=B.length-j;
+				}
+			}else if(j+half<B.length){
+				if(A[A.length-1]<B[j+half]){
+					k-=A.length-i;
+					i+=A.length-i;
+				}else if(A[A.length-1]>B[j+half]){
+					k-=half;
+					j+=half;
+				}else{
+					k-=half+A.length-i;
+					i+=A.length-i;
+					j+=half;
+				}
 			}
+			
 		}
 		if(i>=A.length){
 			if(k>0) return B[j+k-1];
