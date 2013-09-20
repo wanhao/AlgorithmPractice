@@ -31,66 +31,33 @@ public class MedianofTwoSortedArrays {
 		
 		int n=A.length+B.length;
 		if((n&0x01)==0){
-			return 1.0*(findKthInSortedArrays(A,B,n/2)+findKthInSortedArrays(A,B,n/2+1))/2;
+			return 1.0*(findKthInSortedArrays(A,0,B,0,n/2)+findKthInSortedArrays(A,0,B,0,n/2+1))/2;
 		}else{
-			return findKthInSortedArrays(A,B,n/2+1);
+			return findKthInSortedArrays(A,0,B,0,n/2+1);
 		}
 	}
 	
-	private int findKthInSortedArrays(int[] A, int[] B, int k){
-		int i=0,j=0;
-		int half=-1;
-		while(k>1 && i<A.length && j<B.length){
-			half=k/2;
-			if((i+half)<A.length &&(j+half)<B.length){
-				if(A[i+half]<B[j+half]){
-					k-=half;
-					i+=half;
-				}else if(A[i+half]>B[j+half]){
-					k-=half;
-					j+=half;
-				}else{
-					k-=half*2;
-					i+=half;
-					j+=half;
-				}
-			}else if(i+half<A.length){
-				if(A[i+half]<B[B.length-1]){
-					k-=half;
-					i+=half;
-				}else if(A[i+half]>B[B.length-1]){
-					k-=B.length-j;
-					j+=B.length-j;
-				}else{
-					k-=half+B.length-j;
-					i+=half;
-					j+=B.length-j;
-				}
-			}else if(j+half<B.length){
-				if(A[A.length-1]<B[j+half]){
-					k-=A.length-i;
-					i+=A.length-i;
-				}else if(A[A.length-1]>B[j+half]){
-					k-=half;
-					j+=half;
-				}else{
-					k-=half+A.length-i;
-					i+=A.length-i;
-					j+=half;
-				}
-			}
-			
+	private int findKthInSortedArrays(int[] A, int i, int[] B, int j,int k){
+		if(A.length-i>B.length-j){
+			return findKthInSortedArrays(B,j,A,i,k);
 		}
 		if(i>=A.length){
-			if(k>0) return B[j+k-1];
-			else return B[j];
-		}else if(j>=B.length){
-			if(k>0) return A[i+k-1];
-			else return A[i];
-		}else{
-			return A[i]<B[j]?A[i]:B[j];
+			return B[j+k-1];
+		}
+		if(k==1){
+			return Math.min(A[i],B[j]);
 		}
 		
+		int ii=Math.min(i+k/2-1,A.length-1);
+		int jj=j+k-(ii-i+1)-1;
+		
+		if(A[ii]<B[jj]){
+			return findKthInSortedArrays(A,ii+1,B,j,k-(ii-i+1));
+		}else if(A[ii]>B[jj]){
+			return findKthInSortedArrays(A,i,B,jj+1,ii-i+1);
+		}else{
+			return A[ii];
+		}
 	}
 	
 }
