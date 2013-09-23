@@ -48,7 +48,7 @@ public class PreNextPermutation {
 					tmp=s[ii];
 					s[ii]=s[j];
 					s[j]=tmp;
-					i++;
+					ii++;
 					j--;
 				}
 				return true;
@@ -93,7 +93,7 @@ public class PreNextPermutation {
 					tmp=s[ii];
 					s[ii]=s[j];
 					s[j]=tmp;
-					i++;
+					ii++;
 					j--;
 				}
 				return true;
